@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:latest
+    volumes: 
+     - ./nginx:/etc/nginx
+     - ./www:/var/www
+    restart: always
+    ports:
+      - "80:80"
+
+  registry:
+    image: registry:2
+    ports:
+    - "5000:5000"
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+    volumes:
+      - ./data:/data
